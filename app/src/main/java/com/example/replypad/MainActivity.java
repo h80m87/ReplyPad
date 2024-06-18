@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     Button save, list, clear, notify;
     private boolean check = false;
-    int count = 10;
+    int count = 2;
     public static final String PATH = "reply.txt";
 
     //ライフサイクル
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    //str.append(System.getProperty("line.separator"));
+
                     str.append(line);
                     str.append(System.getProperty("line.separator"));
                 }
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
             NotificationChannel channel = new NotificationChannel(
                     "MEMO",
-                    getString(R.string.app_name),
+                    "メモ",
                     NotificationManager.IMPORTANCE_DEFAULT
             );
 
@@ -225,8 +225,7 @@ public class MainActivity extends AppCompatActivity {
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(editText.getText()))
                     .setPriority(NotificationCompat.PRIORITY_HIGH);
 
-            NotificationManagerCompat notificationManagerCompat
-                    = NotificationManagerCompat.from(context);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -238,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-
             notificationManagerCompat.notify(count++, builder.build());
         }
     }

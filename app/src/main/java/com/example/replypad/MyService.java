@@ -26,7 +26,7 @@ public class MyService extends Service {
         super.onCreate();
 
         channel = new NotificationChannel("REPLY",
-                getString(R.string.app_name),
+                "通知入力欄",
                 NotificationManager.IMPORTANCE_DEFAULT
         );
 
