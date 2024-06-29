@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.security.SecureRandom;
 
 public class MainActivity extends AppCompatActivity {
     //変数
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     Button save, list, clear, notify;
     private boolean check = false;
-    int count = 2;
     public static final String PATH = "reply.txt";
 
     //ライフサイクル
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            notificationManagerCompat.notify(count++, builder.build());
+            notificationManagerCompat.notify(new SecureRandom().nextInt(2147483645) + 2, builder.build());
         }
     }
 
