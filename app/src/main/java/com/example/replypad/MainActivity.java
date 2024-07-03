@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 public class MainActivity extends AppCompatActivity {
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder str = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(
-                            openFileInput(PATH)
+                            openFileInput(PATH), StandardCharsets.UTF_8
                     ))) {
 
                 String line;
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void clearReply() {
         try (BufferedWriter writer = new BufferedWriter(
-                new OutputStreamWriter(openFileOutput(PATH, Context.MODE_PRIVATE))
+                new OutputStreamWriter(openFileOutput(PATH, Context.MODE_PRIVATE), StandardCharsets.UTF_8)
         )) {
 
             writer.write("");
@@ -250,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                         StringBuilder str = new StringBuilder();
                         try(BufferedReader reader = new BufferedReader(
                                 new InputStreamReader(
-                                        getContentResolver().openInputStream(title)))) {
+                                        getContentResolver().openInputStream(title), StandardCharsets.UTF_8))) {
                             String line;
                             while((line = reader.readLine()) != null) {
                                 str.append(line);
@@ -275,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                     if(title != null && result.getResultCode() == RESULT_OK) {
                         try(BufferedWriter writer = new BufferedWriter(
                                 new OutputStreamWriter(
-                                        getContentResolver().openOutputStream(title)))) {
+                                        getContentResolver().openOutputStream(title,"wt"), StandardCharsets.UTF_8))) {
                             writer.write(editText.getText().toString());
 
                         } catch(IOException e) {
